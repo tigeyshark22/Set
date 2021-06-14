@@ -7,40 +7,76 @@
 
 import UIKit
 
-struct Leaderboard {
-    let names: [String]
-    let times: [Int]
+class Leaderboard {
+    var names: [String]
+    var times: [Int]
+    var savedString: String
+    var textString: String
     let font: UIFont = UIFont(name: "GillSans", size: 16.0)!
     let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    let fm=FileManager()
+    
     init() {
-        names=[]
-        times=[]
-        let fileURL = URL(fileURLWithPath: "testing123", relativeTo: directoryURL).appendingPathExtension("txt")
+        let fileURL = URL(fileURLWithPath: "setLB", relativeTo: directoryURL).appendingPathExtension("txt")
+        
+        savedString=""
+        textString=""
         
         do {
             // Get the saved data
             let savedData = try Data(contentsOf: fileURL)
             // Convert the data back into a string
-            if let savedString = String(data: savedData, encoding: .utf8) {
-                print(savedString)
+            if let sString = String(data: savedData, encoding: .utf8) {
+                savedString=sString
+                textString=sString
             }
         } catch {
-         // Catch any errors
-            print("Unable to read the file")
+            print("No file")
+            fm.createFile(atPath: fileURL.path, contents: Data (savedString.data(using: .utf8)!), attributes: nil)
+
         }
         
-       // let myString = "Saving data with FileManager is easy!"
-        //guard let data = myString.data(using: .utf8) else {
-         //   print("Unable to convert string to data")
-          //  return
-        //}
+        names=[]
+        times=[]
         
-        //do {
-          //  try data.write(to: fileURL)
-            //    print("File saved: \(fileURL.absoluteURL)")
-        //} catch {
+        while let ind=savedString.firstIndex(of: "\n") {
+            let lbRow=savedString[..<ind]
+            guard let rowInd=lbRow.firstIndex(of: "*") else { return }
+            let rowNextInd=savedString.index(rowInd, offsetBy: 1)
+            let name=lbRow[..<rowInd]
+            let time=lbRow[rowNextInd...]
+            let timeNum=(time as NSString).integerValue
+            insertInList(timeNum: timeNum, name: String(name))
+            
+            let nextInd=savedString.index(ind, offsetBy: 1)
+            savedString=String(savedString[nextInd...])
+        }
+        print(names, times)
+    }
+    
+    func writeTime(name: String, time: Int) {
+        insertInList(timeNum: time, name: name)
+        let wString="\(name)*\(time)\n"
+        textString.append(wString)
+        guard let data = textString.data(using: .utf8) else {
+            print("Unable to convert string to data")
+            return }
+        let fileURL = URL(fileURLWithPath: "setLB", relativeTo: directoryURL).appendingPathExtension("txt")
+        do {
+            try data.write(to: fileURL)
+                print("File saved: \(fileURL.absoluteURL)")
+        } catch {
             // Catch any errors
-          //  print(error.localizedDescription)
-        //}
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func insertInList(timeNum: Int, name: String) {
+        var addInd: Int=0
+        while addInd<times.count && times[addInd]<timeNum {
+            addInd+=1
+        }
+        names.insert(name, at: addInd)
+        times.insert(timeNum, at: addInd)
     }
 }
