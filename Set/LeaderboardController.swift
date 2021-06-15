@@ -1,17 +1,17 @@
 //
-//  RulesController.swift
+//  LeaderboardController.swift
 //  Set
 //
-//  Created by Owen Yang on 6/12/21.
+//  Created by Owen Yang on 6/14/21.
 //
 
-import SwiftUI
+import UIKit
 
-class RulesController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class LeaderboardController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     private let pageControl: UIPageControl={
         let pc=UIPageControl()
         pc.currentPage=0
-        pc.numberOfPages=3
+        pc.numberOfPages=2
         pc.currentPageIndicatorTintColor = .darkGray
         pc.pageIndicatorTintColor = .lightGray
         pc.isUserInteractionEnabled=false
@@ -26,15 +26,16 @@ class RulesController: UICollectionViewController, UICollectionViewDelegateFlowL
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title="Rules"
+        title="Leaderboard"
         view.addSubview(pageControl)
         setUpPC()
+        let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.estimatedItemSize = .zero
         edgesForExtendedLayout = []
         
         collectionView?.backgroundColor = .white
-        collectionView?.register(RulesP1.self, forCellWithReuseIdentifier: "cellId1")
-        collectionView?.register(RulesP2.self, forCellWithReuseIdentifier: "cellId2")
-        collectionView?.register(RulesP3.self, forCellWithReuseIdentifier: "cellId3")
+        collectionView?.register(LeaderboardHint.self, forCellWithReuseIdentifier: "cellId1")
+        collectionView?.register(LeaderboardNoHint.self, forCellWithReuseIdentifier: "cellId2")
         collectionView?.isPagingEnabled=true
         
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -53,7 +54,7 @@ class RulesController: UICollectionViewController, UICollectionViewDelegateFlowL
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,9 +64,6 @@ class RulesController: UICollectionViewController, UICollectionViewDelegateFlowL
         }
         if indexPath.item==1 {
             cell=collectionView.dequeueReusableCell(withReuseIdentifier: "cellId2", for: indexPath)
-        }
-        if indexPath.item==2 {
-            cell=collectionView.dequeueReusableCell(withReuseIdentifier: "cellId3", for: indexPath)
         }
         return cell
     }

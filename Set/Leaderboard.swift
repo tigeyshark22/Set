@@ -19,6 +19,14 @@ class Leaderboard {
     init() {
         let fileURL = URL(fileURLWithPath: "setLB", relativeTo: directoryURL).appendingPathExtension("txt")
         
+        /* //testing purposes
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+        } catch {
+            print("not found")
+        }
+        */
+        
         savedString=""
         textString=""
         

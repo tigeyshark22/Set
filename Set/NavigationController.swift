@@ -11,6 +11,7 @@ class NavigationController: UINavigationController {
         super.viewDidLoad()
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
+        navigationBar.backgroundColor = .white
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

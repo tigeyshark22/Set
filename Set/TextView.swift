@@ -9,7 +9,7 @@ import UIKit
 
 struct TextView {
     var textView: UITextView
-    let font: UIFont = UIFont(name: "GillSans", size: 16.0)!
+    let font: UIFont=UIFont(name: "GillSans", size: 16.0)!
     
     init(text2: String) {
         textView=UITextView()

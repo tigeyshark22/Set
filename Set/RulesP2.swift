@@ -13,7 +13,7 @@ class RulesP2: UICollectionViewCell {
     var hspacing: CGFloat=0
     
     private let text1: UITextView={
-        let textView=TextView.init(text2: "For example, the below three cards\n form a set-we can check that\n all four characteristics are either all\n the same or all different.").textView
+        let textView=TextView.init(text2: "For example, the below three cards form a set-we can check that all four characteristics are either all the same or all different.").textView
         return textView
     }()
     
@@ -33,7 +33,7 @@ class RulesP2: UICollectionViewCell {
     }()
     
     private let text2: UITextView={
-        let textView=TextView.init(text2: "On the other hand, the below three cards\n do NOT form a set because\n two are diamonds and one is an oval.").textView
+        let textView=TextView.init(text2: "On the other hand, the below three cards do NOT form a set because two are diamonds and one is an oval.").textView
         return textView
     }()
     
@@ -68,7 +68,7 @@ class RulesP2: UICollectionViewCell {
     }
     
     private func setUpText1() {
-        text1.frame=CGRect(x: 0, y: 0, width: safeAreaLayoutGuide.layoutFrame.width, height: 100)
+        text1.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive=true
         text1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive=true
         text1.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: CGFloat(vspacing)).isActive=true
     }
@@ -84,7 +84,7 @@ class RulesP2: UICollectionViewCell {
     }
     
     private func setUpText2() {
-        text2.frame=CGRect(x: 0, y: 0, width: safeAreaLayoutGuide.layoutFrame.width, height: 100)
+        text2.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive=true
         text2.centerXAnchor.constraint(equalTo: centerXAnchor).isActive=true
         text2.topAnchor.constraint(equalTo: set2ImageView.bottomAnchor, constant: CGFloat(vspacing)).isActive=true
     }

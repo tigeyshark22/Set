@@ -11,6 +11,7 @@ class MainMenuController: UIViewController {
     
     private var spacing: CGFloat=0
     private var rulesController: UIViewController=UIViewController()
+    private var lbController: UIViewController=UIViewController()
     private var settings: UIViewController=UIViewController()
     
     private let setImageView: UIImageView={
@@ -58,8 +59,13 @@ class MainMenuController: UIViewController {
         lb.translatesAutoresizingMaskIntoConstraints=false
         lb.frame=CGRect(x: 0, y: 0, width: 200, height: 50)
         lb.setTitleColor(.purple, for: .normal)
+        lb.addTarget(self, action: #selector(lbPressed), for: .touchUpInside)
         return lb
     }()
+    
+    @objc private func lbPressed() {
+        navigationController?.pushViewController(lbController, animated: true)
+    }
     
     private let settingsButton: UIButton={
         let sb=UIButton(type: .system)
@@ -82,6 +88,7 @@ class MainMenuController: UIViewController {
         super.viewDidLoad()
         let storyBoard:UIStoryboard=UIStoryboard(name: "Main", bundle:nil)
         rulesController=storyBoard.instantiateViewController(withIdentifier: "Rules") as! RulesController
+        lbController=storyBoard.instantiateViewController(withIdentifier: "Leaderboard") as! LeaderboardController
         settings=storyBoard.instantiateViewController(withIdentifier: "Settings") as! Settings
         
         title="Main Menu"
