@@ -36,7 +36,8 @@ class LeaderboardHint: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        vspacing=CGFloat(safeAreaLayoutGuide.layoutFrame.height)/30
+        overrideUserInterfaceStyle = .light
+        vspacing=25//CGFloat(safeAreaLayoutGuide.layoutFrame.height)/30
         translatesAutoresizingMaskIntoConstraints=false
         addSubview(titleLabel)
         addSubview(captionLabel)

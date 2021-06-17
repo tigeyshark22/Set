@@ -97,6 +97,15 @@ class Deck {
         return selected
     }
     
+    func getCardSelected()->[Card] {
+        let a=getSelected()
+        var b: [Card]=[]
+        for i in 0..<3 {
+            b[i]=current[a[i]]
+        }
+        return b
+    }
+    
     func checkSelected()->[Int] {
         for i in setList {
             if i.elementsEqual(selected) {

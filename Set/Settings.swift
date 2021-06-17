@@ -30,6 +30,7 @@ class Settings: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        overrideUserInterfaceStyle = .light
         title="Settings"
         view.addSubview(toggle)
         view.addSubview(text1)

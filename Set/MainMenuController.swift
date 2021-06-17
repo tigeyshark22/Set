@@ -10,6 +10,7 @@ import UIKit
 class MainMenuController: UIViewController {
     
     private var spacing: CGFloat=0
+    private var gameController: UIViewController=UIViewController()
     private var rulesController: UIViewController=UIViewController()
     private var lbController: UIViewController=UIViewController()
     private var settings: UIViewController=UIViewController()
@@ -30,8 +31,13 @@ class MainMenuController: UIViewController {
         gb.translatesAutoresizingMaskIntoConstraints=false
         gb.frame=CGRect(x: 0, y: 0, width: 200, height: 50)
         gb.setTitleColor(.red, for: .normal)
+        gb.addTarget(self, action: #selector(gbPressed), for: .touchUpInside)
         return gb
     }()
+    
+    @objc private func gbPressed() {
+        navigationController?.pushViewController(gameController, animated: true)
+    }
     
     private let rulesButton: UIButton={
         let rb=UIButton(type: .system)
@@ -64,6 +70,8 @@ class MainMenuController: UIViewController {
     }()
     
     @objc private func lbPressed() {
+        let storyBoard:UIStoryboard=UIStoryboard(name: "Main", bundle:nil)
+        lbController=storyBoard.instantiateViewController(withIdentifier: "Leaderboard") as! LeaderboardController
         navigationController?.pushViewController(lbController, animated: true)
     }
     
@@ -88,7 +96,7 @@ class MainMenuController: UIViewController {
         super.viewDidLoad()
         let storyBoard:UIStoryboard=UIStoryboard(name: "Main", bundle:nil)
         rulesController=storyBoard.instantiateViewController(withIdentifier: "Rules") as! RulesController
-        lbController=storyBoard.instantiateViewController(withIdentifier: "Leaderboard") as! LeaderboardController
+        gameController=storyBoard.instantiateViewController(withIdentifier: "Game") as! GameController
         settings=storyBoard.instantiateViewController(withIdentifier: "Settings") as! Settings
         
         title="Main Menu"
@@ -99,7 +107,7 @@ class MainMenuController: UIViewController {
         view.addSubview(leaderButton)
         view.addSubview(settingsButton)
         
-        spacing=CGFloat(view.safeAreaLayoutGuide.layoutFrame.height)/10
+        spacing=CGFloat(view.safeAreaLayoutGuide.layoutFrame.height-300)/10
         
         setUpSetImage()
         setUpGButton()

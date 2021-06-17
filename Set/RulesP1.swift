@@ -34,6 +34,7 @@ class RulesP1: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        overrideUserInterfaceStyle = .light
         addSubview(text1)
         addSubview(text2)
         addSubview(text3)
