@@ -67,11 +67,13 @@ class Deck {
     
     func checkCurr() {
         setList=[]
-        for i in 0..<current.count-2 {
-            for j in i+1..<current.count-1 {
-                for k in j+1..<current.count {
-                    if current[i].checkSet(c2: current[j], c3: current[k]) {
-                        setList.append([i,j,k])
+        if current.count>0 {
+            for i in 0..<current.count-2 {
+                for j in i+1..<current.count-1 {
+                    for k in j+1..<current.count {
+                        if current[i].checkSet(c2: current[j], c3: current[k]) {
+                            setList.append([i,j,k])
+                        }
                     }
                 }
             }

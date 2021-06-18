@@ -10,14 +10,16 @@ import UIKit
 class Leaderboard {
     var names: [String]
     var times: [Int]
-    var savedString: String
-    var textString: String
-    let font: UIFont = UIFont(name: "GillSans", size: 16.0)!
+    private var savedString: String
+    private var textString: String
+    private let font: UIFont = UIFont(name: "GillSans", size: 16.0)!
     let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     let fm=FileManager()
+    private var fileName: String
     
-    init() {
-        let fileURL = URL(fileURLWithPath: "setLB", relativeTo: directoryURL).appendingPathExtension("txt")
+    init(fileName: String) {
+        self.fileName=fileName
+        let fileURL = URL(fileURLWithPath: fileName, relativeTo: directoryURL).appendingPathExtension("txt")
         
         /* //testing purposes
         do {
@@ -69,7 +71,7 @@ class Leaderboard {
         guard let data = textString.data(using: .utf8) else {
             print("Unable to convert string to data")
             return }
-        let fileURL = URL(fileURLWithPath: "setLB", relativeTo: directoryURL).appendingPathExtension("txt")
+        let fileURL = URL(fileURLWithPath: fileName, relativeTo: directoryURL).appendingPathExtension("txt")
         do {
             try data.write(to: fileURL)
                 print("File saved: \(fileURL.absoluteURL)")

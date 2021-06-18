@@ -37,7 +37,7 @@ class LeaderboardHint: UICollectionViewCell {
         super.init(frame: frame)
 
         overrideUserInterfaceStyle = .light
-        vspacing=25//CGFloat(safeAreaLayoutGuide.layoutFrame.height)/30
+        vspacing=32//CGFloat(safeAreaLayoutGuide.layoutFrame.height)/30
         translatesAutoresizingMaskIntoConstraints=false
         addSubview(titleLabel)
         addSubview(captionLabel)
@@ -79,11 +79,11 @@ class LeaderboardHint: UICollectionViewCell {
     }
     
     private func addLBRow(ind: Int) {
-        let lb=Leaderboard()
+        let lb=Leaderboard(fileName: "setLBHints")
         var name=""
         var time=0
         var textStack=UIStackView()
-        if ind<lb.names.count {
+        if ind<min(lb.names.count, 10) {
             name=lb.names[ind]
             time=lb.times[ind]
             let text1v=TextView.init(text2: "\(ind+1)").textView

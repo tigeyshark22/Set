@@ -18,8 +18,11 @@ class GameTimer {
         displayTime=TextView.init(text2: "0:00").textView
         let font: UIFont=UIFont(name: "GillSans", size: 22.0)!
         displayTime.font=font
+        displayTime.backgroundColor = .none
+    }
+    
+    func start() {
         timer=Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(blah), userInfo: nil, repeats: true)
-        
     }
     
     @objc private func blah() {
